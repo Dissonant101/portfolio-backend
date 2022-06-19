@@ -36,4 +36,3 @@ class Layout(Resource):
 
 
 server = Server()
-server.start()
