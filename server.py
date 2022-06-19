@@ -8,6 +8,9 @@ class Server:
     def __init__(self):
         self.app = Flask(__name__)
         self._initialize_api()
+    
+    def create_app(self):
+        return self.app
 
     def _initialize_api(self):
         self.api = Api(self.app)
@@ -36,3 +39,4 @@ class Layout(Resource):
 
 
 server = Server()
+gunicorn_server = server.create_app
