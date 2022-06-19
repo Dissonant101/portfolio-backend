@@ -39,4 +39,4 @@ class Layout(Resource):
 
 
 server = Server()
-gunicorn_server = server.create_app
+gunicorn_server = server.create_app()
