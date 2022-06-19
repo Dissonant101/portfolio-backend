@@ -35,6 +35,5 @@ class Layout(Resource):
         return ResumeDAO.get_layout(layout_name), HTTPStatus.OK
 
 
-if __name__ == "__main__":
-    server = Server()
-    server.start()
+server = Server()
+server.start()
