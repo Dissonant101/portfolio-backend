@@ -1,4 +1,4 @@
-from flask import Flask
+from flask import Flask, jsonify
 from flask_restful import Resource, Api
 from http import HTTPStatus
 from s3_dao import ResumeDAO
@@ -25,17 +25,23 @@ class Server:
 
 class Resume(Resource):
     def get(self, resume_name: str):
-        return ResumeDAO.get_resume(resume_name), HTTPStatus.OK
+        response = jsonify(ResumeDAO.get_resume(resume_name))
+        response.headers.add("Access-Control-Allow-Origin", "*")
+        return response, HTTPStatus.OK
 
 
 class Stylesheet(Resource):
     def get(self, stylesheet_name: str):
-        return ResumeDAO.get_stylesheet(stylesheet_name), HTTPStatus.OK
+        response = jsonify(ResumeDAO.get_stylesheet(stylesheet_name))
+        response.headers.add("Access-Control-Allow-Origin", "*")
+        return response, HTTPStatus.OK
 
 
 class Layout(Resource):
     def get(self, layout_name: str):
-        return ResumeDAO.get_layout(layout_name), HTTPStatus.OK
+        response = jsonify(ResumeDAO.get_layout(layout_name))
+        response.headers.add("Access-Control-Allow-Origin", "*")
+        return response, HTTPStatus.OK
 
 
 server = Server()
