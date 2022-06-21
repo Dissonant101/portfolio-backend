@@ -1,12 +1,14 @@
-from flask import Flask, jsonify
+from flask import Flask
 from flask_restful import Resource, Api
 from http import HTTPStatus
 from s3_dao import ResumeDAO
+from flask_cors import CORS
 
 
 class Server:
     def __init__(self):
         self.app = Flask(__name__)
+        self.cors = CORS(self.app)
         self._initialize_api()
     
     def create_app(self):
@@ -25,23 +27,17 @@ class Server:
 
 class Resume(Resource):
     def get(self, resume_name: str):
-        response = jsonify(ResumeDAO.get_resume(resume_name))
-        response.headers.add("Access-Control-Allow-Origin", "*")
-        return response, HTTPStatus.OK
+        return ResumeDAO.get_resume(resume_name), HTTPStatus.OK
 
 
 class Stylesheet(Resource):
     def get(self, stylesheet_name: str):
-        response = jsonify(ResumeDAO.get_stylesheet(stylesheet_name))
-        response.headers.add("Access-Control-Allow-Origin", "*")
-        return response, HTTPStatus.OK
+        return ResumeDAO.get_stylesheet(stylesheet_name), HTTPStatus.OK
 
 
 class Layout(Resource):
     def get(self, layout_name: str):
-        response = jsonify(ResumeDAO.get_layout(layout_name))
-        response.headers.add("Access-Control-Allow-Origin", "*")
-        return response, HTTPStatus.OK
+        return ResumeDAO.get_layout(layout_name), HTTPStatus.OK
 
 
 server = Server()
