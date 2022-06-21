@@ -8,7 +8,7 @@ from flask_cors import CORS
 class Server:
     def __init__(self):
         self.app = Flask(__name__)
-        # self.cors = CORS(self.app)
+        self.cors = CORS(self.app)
         self._initialize_api()
     
     def create_app(self):
